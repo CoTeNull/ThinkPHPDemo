@@ -1,0 +1,327 @@
+
+
+{extend name="common/base" /}
+{block name="base"}
+<div class="Admin">
+    <div class="Personal-data">
+        <h4><a href="javasrcipt:;">个人资料</a></h4>
+        <p>姓名：积木</p>
+        <p>联系方式：18250551760</p>
+        <p>邮箱：937669653@qq.com</p>
+    </div>
+
+    <div class="Update">
+
+        <div class="Update-base">
+            <h5>信息管理</h5>
+            <p><a href="javascript:;" onclick="chuan();">发布信息</a></p>
+            <p><a href="javascript:;"onclick="timershow();">分批发布</a></p>
+            <p><a href="javascript:;" onclick="lei();">类别管理</a></p>
+            <p><a href="javascript:;" onclick="ider();">修改基本信息</a></p>
+        </div>
+
+        <div class="Update-system">
+            <h6>系统管理</h6>
+            <p><a href="javascript:;"onclick="show();">发布公告</a></p>
+            <p><a href="javascript:;"onclick="safe();">安全验证管理</a></p>
+        </div>
+    </div>
+</div>
+<div id="adminchuan" style="display: block" class="Main-message">
+    <h1>发布信息</h1>
+    <hr />
+    <div class="manage">
+        <h3>账号类型：</h3>
+        <select class="select-select" id="danSelect">
+
+            {foreach $data as $key=>$item}
+            <option value="{$item['ID']}">
+                {$item["Kind"]}
+            </option>
+            {/foreach}
+
+        </select>
+        <h3>发布内容：</h3>
+        <div class="Message">
+            <textarea class="ckeditor" id="danText"></textarea>
+        </div>
+    </div>
+
+    <div class="identify">
+        {:captcha_img()}
+        <input type="text" name="identify" id="danYzm" value placeholder="输入验证码"/>
+        <input type="submit" value="发布" name="submit" id="danPost"/>
+        <script>
+            $("#danPost").click(function () {
+                var newData=$("#danText").val().split("\n");
+                newData=JSON.stringify(newData);
+                var newDataKind=$("#danSelect").val();
+                var yzm=$("#danYzm").val();
+                $.post("send",{"text":newData,"kind":newDataKind,"yzm":yzm},function (data) {
+                    if(data){
+                        alert("发布成功");
+                    }else{
+                        alert("发布失败");
+                    }
+                })
+            })
+        </script>
+    </div>
+
+</div>
+<div id="admintimershow" style="display: none" class="Main-message">
+    <h1>分批发布</h1>
+    <hr />
+    <div class="manage">
+        <h3>账号类型：</h3>
+        <select class="select-select" id="timeSelect">
+
+            {foreach $data as $key=>$item}
+            <option value="{$item['ID']}">
+                {$item["Kind"]}
+            </option>
+            {/foreach}
+
+        </select>
+        <h3>详情：</h3>
+        <div class="Message">
+            <textarea class="ckeditor" id="timeText"></textarea>
+        </div>
+    </div>
+    <select class="select-select timershow" id="timeSum">
+        <option value="1">
+            分1天发布
+        </option>
+        <option value="2">
+            分2天发布
+        </option>
+        <option value="3">
+            分3天发布
+        </option>
+        <option value="4">
+            分4天发布
+        </option>
+        <option value="5">
+            分5天发布
+        </option>
+        <option value="6">
+            分6天发布
+        </option>
+        <option value="7">
+            分7天发布
+        </option>
+    </select>
+    <div class="identify">
+        {:captcha_img()}
+        <input type="text" id="timeYzm" name="identify" value placeholder="填错需重新输入"/>
+        <input type="submit" value="发布" name="submit" id="timeSend"/>
+    </div>
+    <script>
+        $("#timeSend").click(function () {
+            var timeData=$("#timeText").val().split("\n");
+            var num=$("#timeSum").val();
+            if(timeData.length!=(num*2)){
+                alert("请输入"+num*2+"条信息");
+            }else{
+                timeData=JSON.stringify(timeData);
+                var newDataKind=$("#timeSelect").val();
+                var yzm=$("#timeYzm").val();
+                $.post("timeSend",{"text":timeData,"kind":newDataKind,"yzm":yzm},function (data) {
+                    console.log(data);
+                    if(data){
+                        alert("发布成功"+data);
+                    }else{
+                        alert("发布失败"+data);
+                    }
+                })
+            }
+        })
+    </script>
+
+</div>
+<div id="adminlei"  style="display: none" class="Main-message">
+    <h1>类别管理</h1>
+    <hr>
+    <div class="manage">
+        <h3>账号类型：</h3>
+        <select class="select-select" id="kindSelect">
+            {foreach $data as $key=>$item}
+            <option value="{$key}">
+                {$item["Kind"]}
+            </option>
+            {/foreach}
+        </select>
+        <script>
+            $("#kindSelect").change(function () {
+                $("#kindTop").val("");
+                $("#kindFoot").val("");
+                $.post("kind",{"nowKind":$("#kindSelect").val()*1+1},function (data) {
+                    $("#kindTop").val(data.dataUp);
+                    $("#kindFoot").val(data.dataDown);
+                })
+            })
+        </script>
+        <h3>头部：</h3>
+        <div class="Message">
+            <textarea style="font-size:20px;" class="ckeditor" id="kindTop"></textarea>
+        </div>
+        <h3>尾部：</h3>
+        <div class="Message">
+            <textarea style="font-size:20px;" class="ckeditor" id="kindFoot"></textarea>
+        </div>
+    </div>
+    <div class="identify">
+        {:captcha_img()}
+        <input id ="kcyzm" type="text" name="identify" value placeholder="输入验证码" />
+        <input type="submit" value="发布" name="submit" id="kindChange"/>
+        <script>
+            $("#kindChange").click(function () {
+                var upText=$("#kindTop").val();
+                var downText=$("#kindFoot").val();
+                var yzm=$("#kcyzm").val();
+                $.post("kindChange",{"nowKind":$("#kindSelect").val()*1+1,"upText":upText,"downText":downText,"yzm":yzm},function (data) {
+                    if(data){
+                        alert("更新成功");
+                    }else{
+                        alert("更新失败");
+                    }
+                })
+            })
+        </script>
+    </div>
+
+</div>
+<div id="adminid" style="display: none" class="Main-message">
+    <h1>个人资料</h1>
+    <hr />
+    <div class="Data-one">
+        <p>账号：<input type="text" value="" /></p>
+        <p>邮箱：<input type="text" value="" /></p>
+        <p>昵称：<input type="text" value="" /></p>
+    </div>
+
+    <div class="identify">
+        <p>{:captcha_img()}
+            <input type="text" name="identify" value placeholder="输入验证码"/>
+            <input type="submit" value="修改" name="submit"/></p>
+    </div>
+
+</div>
+<div id="adminshow" style="display: none" class="Main-message">
+    <h1>发布公告</h1>
+    <hr />
+    <div class="manage">
+        <h3>标题：</h3>
+        <input type="text" name="title" />
+        <h3>公告详情：</h3>
+        <div class="Message">
+            <textarea class="ckeditor"></textarea>
+        </div>
+    </div>
+
+    <div class="identify">
+        {:captcha_img()}
+        <input type="text" name="identify" value placeholder="输入验证码"/>
+        <input type="submit" value="发布" name="submit" />
+    </div>
+
+</div>
+<div id="adminsafe" style="display: none" class="Main-message">
+    <h1>安全验证管理</h1>
+    <hr />
+    <table border="3">
+        <tr>
+            <th>序号</th>
+            <th>账号</th>
+            <th>邮箱</th>
+            <th>昵称</th>
+            <th>操作</th>
+        </tr>
+
+
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><a href="javascript:;">删除</a></td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><a href="javascript:;">删除</a></td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><a href="javascript:;">删除</a></td>
+        </tr>
+
+    </table>
+</div>
+<script>
+    var adminchuan   =document.getElementById('adminchuan');
+    var adminlei   =document.getElementById('adminlei');
+    var adminid   =document.getElementById('adminid');
+    var adminshow   =document.getElementById('adminshow');
+    var admintimershow   =document.getElementById('admintimershow');
+    var adminsafe   =document.getElementById('adminsafe');
+    //region--页面切换--
+    function chuan() {
+        hiddenall();
+        adminchuan.style.display="block";
+    }
+    function lei() {
+        hiddenall();
+        adminlei.style.display="block";
+    }
+    function ider() {
+        hiddenall();
+        adminid.style.display="block";
+    }
+    function show() {
+        hiddenall();
+        adminshow.style.display="block";
+    }
+    function timershow() {
+        hiddenall();
+        admintimershow.style.display="block";
+    }
+    function safe() {
+        hiddenall();
+        adminsafe.style.display="block";
+    }
+    function hiddenall() {
+        adminchuan.style.display="none";
+        adminchuan.style.display="none";
+        adminlei.style.display="none";
+        adminid.style.display="none";
+        adminshow.style.display="none";
+        admintimershow.style.display="none";
+        adminsafe.style.display="none";
+
+    }
+    //endregion
+</script>
+{/block}
+    <!--此处添加子版页-->
+    <div class="righttop">
+        <p>顶部</p>
+        <img src="__IMG__/dingbu.png" alt="" ondragstart="return false">
+    </div>
+</div>
+<footer>
+    <h2>免责声明</h2>
+    <p>本站所有账号均来自热心网友分享，以让用户体验会员服务为目的，并不以此为盈利目的，账号所有权归原账号注册人和原视频网站所有，本站不承担任何责任。</p>
+    <p>Copyright © 影视vip分享网 版权所有.</p>
+    <img src="__IMG__/piclogo.gif" alt="王牌vip分享">
+</footer>
+
+</body>
+</html>

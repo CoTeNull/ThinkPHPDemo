@@ -1,0 +1,105 @@
+{extend name="common/base" /}
+{block name="base"}
+    <article><h1 hidden>影视VIP分享</h1>
+        <div class="center">
+            <div>
+                <ul id="oUlmove">
+                    <li><img src="__IMG__/logo.jpg" alt=""></li>
+                    <li><img src="__IMG__/欢乐-1.jpg" alt=""></li>
+                    <li><img src="__IMG__/三生-1.jpg" alt=""></li>
+                    <li><img src="__IMG__/全网图片-1.jpg" alt=""></li>
+                    <li><img src="__IMG__/logo2.jpg" alt=""></li>
+                </ul>
+            </div>
+            <div class="center-li">
+                <ul>
+                    <!--主内容域-->
+                    {foreach $data as $key=>$item}
+                    <li>
+                        <img src="__IMG__/ma.jpg" alt="">
+                        <h3>
+                            <img src="__IMG__/star.png" alt="标题">
+                            <a href="message?id={$item->ID}">{$item->Times} {$item->Kind}会员账号共享 免费更新</a>
+                        </h3>
+
+                        <p>
+                            {$minUpContent[$key]["minUpContent"]}
+                        </p>
+                        <p><img src="__IMG__/time.png" alt="时间">{$item->Times} <a href="message?id={$item->ID}">阅读全文</a>
+                        </p>
+
+                    </li>
+                    {/foreach}
+                </ul>
+
+            </div>
+            <div class="center-footer">
+                <a href="#"><img src="__IMG__/left.png" alt="上一页"></a>
+                <a href="#">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">...</a>
+                <a href="#"><img src="__IMG__/right.png" alt="下一页"></a>
+            </div>
+        </div>
+    </article>
+    <div class="rightnav">
+        <span><span>网站公告</span></span>
+        <div class="show">
+            <ul>
+                <li>
+                    <a href="javascript:;">致各位阳光影视分享网的朋友【建议必看】</a>
+                </li>
+                <li>
+                    <a href="javascript:;">预告：请大家注册会员，福利多多！</a>
+                </li>
+                <li>
+                    <a href="javascript:;">爱奇艺和搜狐网页无法观看的解决办法</a>
+                </li>
+                <li>
+                    <a href="javascript:;">致各位阳光影视分享网的朋友【建议必看】</a>
+                </li>
+                <li>
+                    <a href="javascript:;">预告：请大家注册会员，福利多多！</a>
+                </li>
+            </ul>
+        </div>
+        <span id="abouthead"><h1>微信ygys33分享更多账号</h1></span>
+        <div class="about">
+            <img src="__IMG__/ma.jpg" alt="王牌vip分享">
+        </div>
+        <span><span>热门推荐</span></span>
+        <div class="before">
+            <ul>
+                <li>
+                    <div>
+                        <img src="__IMG__/logo.gif" alt="">
+                    </div>
+                    <img src="__IMG__/hot2.jpg" alt="">
+                    <p><a href="javascript:;">公告：关注vip分享网官方微信公众号更多账号 更高</a></p>
+                </li>
+                <li>
+                    <div><img src="__IMG__/logo.gif" alt="爱奇艺"></div><img src="__IMG__/hot2.jpg" alt="爱奇艺vip账号">
+                    <p><a href="javascript:;">活动：勤点赞 乐分享 vip分享网需要您的一份力</a></p>
+                </li>
+                <li>
+                    <div><img src="__IMG__/logo.gif" alt=""></div><img src="__IMG__/hot2.jpg" alt="腾讯vip会员">
+                    <p><a href="javascript:;">优酷土豆黄金会员1个月6元 稳定可靠 完美售后</a></p>
+                </li>
+                <li>
+                    <div><img src="__IMG__/logo.gif" alt=""></div><img src="__IMG__/hot2.jpg" alt="爱奇艺vip账号">
+                    <p><a href="javascript:;">爱奇艺黄金会员1个月激活码13.5元 开通激活自己的</a></p>
+                </li>
+                <li>
+                    <div><img src="__IMG__/logo.gif" alt=""></div><img src="__IMG__/hot2.jpg" alt="腾讯vip会员">
+                    <p><a href="javascript:;">世界，您好！</a></p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="righttop">
+        <p>顶部</p>
+        <img src="__IMG__/dingbu.png" alt="" ondragstart="return false">
+    </div>
+{/block}
+

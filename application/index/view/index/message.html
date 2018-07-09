@@ -1,0 +1,112 @@
+{extend name="common/base" /}
+
+{block name="base"}
+    <article>
+        <div class="Main_article">
+            <div class="Main_article_header">
+                <h1>{$data->Times}{$data->Kind}账号共享 免费更新</h1>
+                <div>
+                    <p>{$data->Times}</p>
+                    <p>阅读({$data->Hit})</p>
+                    <p>评论(0)</p>
+                </div>
+            </div>
+            <div class="Main_article_center">
+                <div>
+                    <p><span style="color: #07b35a;">免费账号只要人多就会出现错误过多了，如需稳定的账号请点击下面</span></p>
+                    <p><strong><a class="Main_article_center_more" style="color: #ff5e52;" title="" href="" data-wpel-target="_blank">查看会员详细介绍和更多付款方式</a></strong></p>
+                   <!--UpContent-->
+                    <p>{$data->UpContent}</p>
+                </div>
+                <div>  <p><span style="color: #339966;">
+                    {php}
+                     $content=json_decode($data->Content);
+                     echo($content[0]);
+                        echo "<br>";
+                        echo "<br>";
+                     echo($content[1]);
+                    {/php}
+                      <!--{$data->Content}-->
+                </span></p>
+                </div>
+                <div> <p><span style="color: #99cc00;">
+                    <!--DownContent-->
+                    {$data->DownContent}
+                </span></p>
+                    <p style="color: #444444;"><img src="http://www.vip866.com/img/qrcode_for_gh_27a2580fb949_430.jpg" alt="vip866微信公众号" width="250px" data-tag="bdshare"/></p>
+                    <h3>&nbsp;&nbsp;爱奇艺、优酷等网站热播影视剧</h3>
+                    <p><span style="color: #008000;">更多优酷会员电影 免会员观看，<a href="http://bbs.vip866.com/forum-42-1.html" target="_blank">请访问电影论坛</a></span></p></div>
+            </div>
+            <div class="Main_article_footer">
+                <h4 class='Main_article_center_next'>评论</h4>
+                <div class="ftext">
+                    <p>游客1006 :</p>
+                    <span>02-19</span>
+                    <p>很好，很好</p>
+                </div>
+                <div class="ltext">
+                    <textarea id="TextArea1" cols="20" rows="2" class="ckeditor"></textarea>
+                    <input type="button" name="submit" value="提交评论">
+                </div>
+            </div>
+        </div>
+    </article>
+    <div class="rightnav">
+        <span><span>网站公告</span></span>
+        <div class="show">
+            <ul>
+                <li>
+                    <a href="javascript:;">致各位阳光影视分享网的朋友【建议必看】</a>
+                </li>
+                <li>
+                    <a href="javascript:;">预告：请大家注册会员，福利多多！</a>
+                </li>
+                <li>
+                    <a href="javascript:;">爱奇艺和搜狐网页无法观看的解决办法</a>
+                </li>
+                <li>
+                    <a href="javascript:;">致各位阳光影视分享网的朋友【建议必看】</a>
+                </li>
+                <li>
+                    <a href="javascript:;">预告：请大家注册会员，福利多多！</a>
+                </li>
+            </ul>
+        </div>
+        <span id="abouthead"><h1>微信ygys33分享更多账号</h1></span>
+        <div class="about">
+            <img src="__IMG__/ma.jpg" alt="王牌vip分享">
+        </div>
+        <span><span>热门推荐</span></span>
+        <div class="before">
+            <ul>
+                <li>
+                    <div>
+                        <img src="__IMG__/logo.gif" alt="">
+                    </div>
+                    <img src="__IMG__/hot2.jpg" alt="">
+                    <p><a href="javascript:;">公告：关注vip分享网官方微信公众号更多账号 更高</a></p>
+                </li>
+                <li>
+                    <div><img src="__IMG__/logo.gif" alt="爱奇艺"></div><img src="__IMG__/hot2.jpg" alt="爱奇艺vip账号">
+                    <p><a href="javascript:;">活动：勤点赞 乐分享 vip分享网需要您的一份力</a></p>
+                </li>
+                <li>
+                    <div><img src="__IMG__/logo.gif" alt=""></div><img src="__IMG__/hot2.jpg" alt="腾讯vip会员">
+                    <p><a href="javascript:;">优酷土豆黄金会员1个月6元 稳定可靠 完美售后</a></p>
+                </li>
+                <li>
+                    <div><img src="__IMG__/logo.gif" alt=""></div><img src="__IMG__/hot2.jpg" alt="爱奇艺vip账号">
+                    <p><a href="javascript:;">爱奇艺黄金会员1个月激活码13.5元 开通激活自己的</a></p>
+                </li>
+                <li>
+                    <div><img src="__IMG__/logo.gif" alt=""></div><img src="__IMG__/hot2.jpg" alt="腾讯vip会员">
+                    <p><a href="javascript:;">世界，您好！</a></p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="righttop">
+        <p>顶部</p>
+        <img src="__IMG__/dingbu.png" alt="" ondragstart="return false">
+    </div>
+{/block}

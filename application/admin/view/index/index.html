@@ -1,0 +1,17 @@
+﻿{extend name="common/base" /}
+{block name="base"}
+<div class="DengLu_header">
+    <form action="login" class="DengLu" method="post">
+        <h1>后台管理登陆</h1>
+        <p>账号：</p><input type="text" id="name" name="user">
+        <br>
+        <p>密码：</p><input type="password" id="pass" name="pas">
+        <br>
+        {:captcha_img()}
+        <input type="text" value placeholder="请输入左边验证码" class="ma" name="yzm">
+        <br>
+        <input type="submit" value="登陆" id="login">
+    </form>
+</div>
+ {/block}
+    <!--此处添加子版页-->
